@@ -1,7 +1,9 @@
 package com.naver.webtoon.member.dto.request;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 public class MemberLoginRequest {
 

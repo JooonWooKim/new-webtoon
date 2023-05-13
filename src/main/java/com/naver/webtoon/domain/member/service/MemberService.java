@@ -37,6 +37,7 @@ public class MemberService {
         Member member = request.toMember(encryptedPassword);
 
         memberRepository.save(member);
+
     }
 
     @Transactional

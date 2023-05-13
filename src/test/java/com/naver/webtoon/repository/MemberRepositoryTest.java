@@ -23,8 +23,8 @@ public class MemberRepositoryTest {
     MemberRepository memberRepository;
 
     @Test
-    @DisplayName("회원저장 성공 테스트")
-    public void 회원저장_성공_테스트() {
+    @DisplayName("성공_회원저장")
+    public void 성공_회원저장() {
         //given
         Member member = MemberFixture.buildMember(USERNAME, PASSWORD, COOKIE_COUNT);
         //when
@@ -37,8 +37,8 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("회원저장시 아이디가 없음")
-    public void 회원저장시_아이디가_없음() {
+    @DisplayName("오류_회원저장시_아이디_없음")
+    public void 오류_회원저장시_아이디_없음() {
         //given
         Member member = MemberFixture.buildMember(null, PASSWORD, COOKIE_COUNT);
 
@@ -47,8 +47,8 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("회원저장시 비밀번호가 없음")
-    public void 회원저장시_비밀번호가_없음(){
+    @DisplayName("오류_회원저장시_비밀번호_없음")
+    public void 오류_회원저장시_비밀번호_없음(){
         //given
         Member member = MemberFixture.buildMember(USERNAME, null, COOKIE_COUNT);
 
@@ -57,8 +57,8 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("회원저장시 쿠키가 없음")
-    public void 회원저장시_쿠키가_없음(){
+    @DisplayName("오류_회원저장시_쿠키_없음")
+    public void 오류_회원저장시_쿠키_없음(){
         //given
         Member member = MemberFixture.buildMember(USERNAME, PASSWORD, null);
 
@@ -67,11 +67,11 @@ public class MemberRepositoryTest {
     }
 
     @Test
-    @DisplayName("회원저장시_중복된_아이디_존재")
-    public void 회원저장시_중복된_아이디_존재(){
+    @DisplayName("오류_회원저장_중복된_아이디_존재")
+    public void 오류_회원저장_중복된_아이디_존재(){
         //given
         Member member1 = MemberFixture.buildMember(USERNAME, PASSWORD, COOKIE_COUNT);
-        Member member2 = MemberFixture.buildMember(USERNAME, "test1", 0);
+        Member member2 = MemberFixture.buildMember(USERNAME, PASSWORD, COOKIE_COUNT);
         //when
         memberRepository.save(member1);
         //then

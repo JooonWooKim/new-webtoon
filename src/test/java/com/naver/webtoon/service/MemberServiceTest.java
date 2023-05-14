@@ -8,7 +8,6 @@ import com.naver.webtoon.domain.member.repository.MemberRepository;
 import com.naver.webtoon.domain.member.service.MemberService;
 import com.naver.webtoon.global.common.exception.WebtoonException;
 import com.naver.webtoon.global.common.jwt.JwtUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +27,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@Slf4j
 public class MemberServiceTest {
     @InjectMocks
     MemberService memberService;
@@ -46,12 +44,13 @@ public class MemberServiceTest {
         //given
         MemberSignUpRequest request = new MemberSignUpRequest(USERNAME, PASSWORD);
 
-        //when
         when(memberRepository.existsByUsername(request.getUsername())).thenReturn(false);
         when(encoder.encode(request.getPassword())).thenReturn(ENCRYPTED_PASSWORD);
 
+        //when
         memberService.signUp(request);
 
+        //then
         ArgumentCaptor<Member> memberArgumentCaptor = ArgumentCaptor.forClass(Member.class);
         verify(memberRepository, times(1)).save(memberArgumentCaptor.capture());
 
@@ -67,14 +66,15 @@ public class MemberServiceTest {
         MemberLoginRequest request = new MemberLoginRequest(USERNAME, PASSWORD);
         Member member = buildMember(USERNAME, PASSWORD, COOKIE_COUNT);
 
-        //when
         when(memberRepository.findByUsername(request.getUsername())).thenReturn(Optional.of(member));
         when(encoder.matches(request.getPassword(), member.getPassword())).thenReturn(true);
         when(jwtUtil.createAccessToken(request.getUsername())).thenReturn("token");
 
-        //then
+        //when
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
         memberService.login(request, response);
+
+        //then
         verify(response).addHeader(Mockito.eq("AccessToken"), Mockito.anyString());
     }
 
@@ -84,12 +84,11 @@ public class MemberServiceTest {
         //given
         MemberLoginRequest request = new MemberLoginRequest(USERNAME, PASSWORD);
 
-        //when
         Mockito.when(memberRepository.findByUsername(request.getUsername())).thenReturn(Optional.empty());
 
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
-        // then
+        //when,then
         assertThatThrownBy(() -> memberService.login(request, response))
                 .isInstanceOf(WebtoonException.class);
     }
@@ -99,13 +98,13 @@ public class MemberServiceTest {
         //given
         MemberLoginRequest request = new MemberLoginRequest(USERNAME, PASSWORD);
         Member member = MemberFixture.buildMember(USERNAME, PASSWORD, COOKIE_COUNT);
-        //when
+
         when(memberRepository.findByUsername(request.getUsername())).thenReturn(Optional.of(member));
         when(encoder.matches(request.getPassword(), member.getPassword())).thenReturn(false);
 
         HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
 
-        //then
+        //when,then
         assertThatThrownBy(()-> memberService.login(request, response))
                 .isInstanceOf(WebtoonException.class);
     }
@@ -116,10 +115,9 @@ public class MemberServiceTest {
         //given
         MemberSignUpRequest request = new MemberSignUpRequest(USERNAME, PASSWORD);
 
-        //when
         when(memberRepository.existsByUsername(request.getUsername())).thenReturn(true);
 
-        //then
+        //when,then
         assertThatThrownBy(()->memberService.signUp(request))
                 .isInstanceOf(WebtoonException.class);
     }

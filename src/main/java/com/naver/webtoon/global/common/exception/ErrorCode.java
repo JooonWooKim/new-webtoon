@@ -18,6 +18,8 @@ public enum ErrorCode {
     NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, "MEMBER_002", "찾을 수 없는 회원입니다."),
     NOT_VALID_PASSWORD(HttpStatus.BAD_REQUEST, "MEMBER_003", "비밀번호를 다시 확인해주세요."),
     ALREADY_EXIST_USERNAME(HttpStatus.BAD_REQUEST, "MEMBER_004", "이미 존재하는 회원 아이디입니다."),
+    ALREADY_EXIST_WEBTOONNAME(HttpStatus.BAD_REQUEST, "WEBTOON_001", "이미 존재하는 웹툰 제목입니다."),
+    NOT_FOUND_AUTHOR(HttpStatus.NOT_FOUND, "AUTHOR_002", "찾을 수 없는 작가입니다."),
     ;
 
     private final HttpStatus httpStatus;

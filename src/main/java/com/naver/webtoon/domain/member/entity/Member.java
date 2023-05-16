@@ -34,4 +34,5 @@ public class Member extends Timestamped {
         this.password = password;
         this.cookieCount = cookieCount;
     }
+
 }

@@ -14,8 +14,8 @@ public class WebtoonPublishingDay extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "publishing_day_id")
-    private Long publishingDayId;
+    @Column(name = "webtoon_publishing_day_id")
+    private Long webtoonPublishingDayId;
 
     @ManyToOne
     @JoinColumn(name = "webtoon_id")

@@ -17,11 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebtoonController {
     private final WebtoonService webtoonService;
 
-//    @GetMapping("/{publishingDay}/popular")
-//    public ResponseEntity<SuccessMessage<PublishingDayResponse>> getWeeklyPopularWebtoonByDayOfWeek(@PathVariable PublishingDay day){
-//        return new ResponseEntity<>(new SuccessMessage<>("요일별업데이트순웹툰조회성공", webtoonService.getWeeklyPopularWebtoonByDayOfWeek(day)), HttpStatus.OK);
-//    }
-
     //웹툰등록
     @PostMapping("")
     public ResponseEntity<SuccessMessage<Void>> 웹툰등록(@RequestBody WebtoonCreateRequest request){

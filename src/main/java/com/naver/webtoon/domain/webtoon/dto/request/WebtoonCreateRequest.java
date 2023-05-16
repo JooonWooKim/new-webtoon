@@ -5,7 +5,6 @@ import com.naver.webtoon.domain.webtoon.enums.SerializedStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -16,8 +15,8 @@ public class WebtoonCreateRequest {
     private String thumbnail;
     private String description;
     private SerializedStatus serializedStatus;
-    private List<HashTag> hashTagList = new ArrayList<>();
     private List<String> publishingDay;
+    private List<String> hashTag;
 
     public Webtoon toWebtoon(Author author){
         return Webtoon.builder()
@@ -32,6 +31,13 @@ public class WebtoonCreateRequest {
         return WebtoonPublishingDay.builder()
                 .webtoon(webtoon)
                 .publishingDay(publishingDay)
+                .build();
+    }
+
+    public WebtoonHashTag toWebtoonHashTag(Webtoon webtoon, HashTag hashTag) {
+        return WebtoonHashTag.builder()
+                .webtoon(webtoon)
+                .hashTag(hashTag)
                 .build();
     }
 }

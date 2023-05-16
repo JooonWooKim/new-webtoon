@@ -1,9 +1,7 @@
 package com.naver.webtoon.domain.webtoon.dto.request;
 
-import com.naver.webtoon.domain.webtoon.entity.Author;
-import com.naver.webtoon.domain.webtoon.entity.HashTag;
-import com.naver.webtoon.domain.webtoon.entity.Webtoon;
-import com.naver.webtoon.domain.webtoon.enums.PublishingDays;
+import com.naver.webtoon.domain.webtoon.entity.*;
+import com.naver.webtoon.domain.webtoon.enums.SerializedStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,9 +15,9 @@ public class WebtoonCreateRequest {
     private String author;
     private String thumbnail;
     private String description;
-    private String serializedStatus;
+    private SerializedStatus serializedStatus;
     private List<HashTag> hashTagList = new ArrayList<>();
-    private PublishingDays publishingDay;
+    private List<String> publishingDay;
 
     public Webtoon toWebtoon(Author author){
         return Webtoon.builder()
@@ -28,5 +26,12 @@ public class WebtoonCreateRequest {
                 .thumbnail(thumbnail)
                 .description(description)
                 .serializedStatus(serializedStatus).build();
+    }
+
+    public WebtoonPublishingDay toWebtoonPublishingDay(Webtoon webtoon, PublishingDay publishingDay){
+        return WebtoonPublishingDay.builder()
+                .webtoon(webtoon)
+                .publishingDay(publishingDay)
+                .build();
     }
 }

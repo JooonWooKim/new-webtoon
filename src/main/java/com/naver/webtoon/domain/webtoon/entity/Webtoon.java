@@ -1,5 +1,6 @@
 package com.naver.webtoon.domain.webtoon.entity;
 
+import com.naver.webtoon.domain.webtoon.enums.SerializedStatus;
 import com.naver.webtoon.global.common.time.Timestamped;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,7 +24,8 @@ public class Webtoon extends Timestamped {
     private String title;
     private String thumbnail;
     private String description;
-    private String serializedStatus;
+    @Enumerated(EnumType.STRING)
+    private SerializedStatus serializedStatus;
 
     //작가(Author)는 다수의 웹툰을 보유가능(oneToMany)
     @ManyToOne
@@ -41,7 +43,7 @@ public class Webtoon extends Timestamped {
                    Author author,
                    String thumbnail,
                    String description,
-                   String serializedStatus){
+                   SerializedStatus serializedStatus){
         this.title = title;
         this.author = author;
         this.thumbnail = thumbnail;

@@ -2,6 +2,7 @@ package com.naver.webtoon.domain.webtoon.entity;
 
 import com.naver.webtoon.global.common.time.Timestamped;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,8 +15,8 @@ public class WebtoonPublishingDay extends Timestamped {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "publishing_day_id")
-    private Long publishingDayId;
+    @Column(name = "webtoon_publishing_day_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "webtoon_id")
@@ -24,4 +25,11 @@ public class WebtoonPublishingDay extends Timestamped {
     @ManyToOne
     @JoinColumn(name = "publishing_day_id")
     private PublishingDay publishingDay;
+
+    @Builder
+    public WebtoonPublishingDay(Long id, Webtoon webtoon, PublishingDay publishingDay){
+        this.id = id;
+        this.webtoon = webtoon;
+        this.publishingDay = publishingDay;
+    }
 }

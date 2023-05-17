@@ -14,17 +14,19 @@ public class WebtoonCreateRequest {
     private String author;
     private String thumbnail;
     private String description;
-    private SerializedStatus serializedStatus;
+    private String serializedStatus;
     private List<String> publishingDay;
     private List<String> hashTag;
 
     public Webtoon toWebtoon(Author author){
+        SerializedStatus serializedStatusEnum = SerializedStatus.toEnum(serializedStatus);
+
         return Webtoon.builder()
                 .title(title)
                 .author(author)
                 .thumbnail(thumbnail)
                 .description(description)
-                .serializedStatus(serializedStatus).build();
+                .serializedStatus(serializedStatusEnum).build();
     }
 
     public WebtoonPublishingDay toWebtoonPublishingDay(Webtoon webtoon, PublishingDay publishingDay){

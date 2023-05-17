@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,16 +25,9 @@ public class Webtoon extends Timestamped {
     @Enumerated(EnumType.STRING)
     private SerializedStatus serializedStatus;
 
-    //작가(Author)는 다수의 웹툰을 보유가능(oneToMany)
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
-
-    @OneToMany(mappedBy = "webtoon")
-    private List<WebtoonHashTag> webtoonHashTagList = new ArrayList<>();
-
-    @OneToMany(mappedBy = "webtoon")
-    private List<WebtoonPublishingDay> webtoonPublishingDayList = new ArrayList<>();
 
     @Builder
     public Webtoon(String title,

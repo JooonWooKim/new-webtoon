@@ -45,6 +45,14 @@ public class WebtoonService {
         updateWebtoonPublishingDay(webtoon, request);
         updateWebtoonHashTag(webtoon, request);
     }
+    @Transactional
+    public void deleteWebtoon(Long webtoonId){
+        Webtoon webtoon = webtoonRepository.findById(webtoonId).orElseThrow(
+                () -> new WebtoonException(NOT_FOUND_WEBTOON));
+        webtoonHashTagRepository.deleteByWebtoonId(webtoon.getId());
+        webtoonPublishingDayRepository.deleteByWebtoonId(webtoon.getId());
+        webtoonRepository.delete(webtoon);
+    }
     public void saveWebtoonPublishingDay(Webtoon webtoon, WebtoonCreateRequest request){
         for(String dayOfTheWeek : request.getPublishingDay()){
             DayOfTheWeek publishingDayEnum = DayOfTheWeek.toEnum(dayOfTheWeek);

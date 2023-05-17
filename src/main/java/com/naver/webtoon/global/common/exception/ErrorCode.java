@@ -24,6 +24,7 @@ public enum ErrorCode {
     NOT_FOUND_PUBLISHING_DAY(HttpStatus.NOT_FOUND, "PUBLISHING_DAY_002", "찾을 수 없는 연재일입니다."),
     NOT_FOUND_SERIALIZED_STATUS(HttpStatus.NOT_FOUND, "SERIALIZED_STATUS_002", "찾을 수 없는 연재상태입니다."),
     NOT_FOUND_HASH_TAG(HttpStatus.NOT_FOUND, "HASH_TAG_002", "찾을 수 없는 해시태그입니다."),
+    NOT_FOUND_WEBTOON(HttpStatus.NOT_FOUND, "WEBTOON_002", "찾을 수 없는 웹툰입니다."),
     ;
 
     private final HttpStatus httpStatus;

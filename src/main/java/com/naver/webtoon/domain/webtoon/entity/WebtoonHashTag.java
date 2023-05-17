@@ -18,11 +18,11 @@ public class WebtoonHashTag extends Timestamped {
     @Column(name = "webtoon_hash_tag_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hash_tag_id")
     private HashTag hashTag;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "webtoon_id")
     private Webtoon webtoon;
 

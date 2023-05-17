@@ -9,7 +9,7 @@ public enum SerializedStatus {
     PAUSE,
     COMPLETE;
 
-    public static SerializedStatus toSerializedStatus(String serializedStatus){
+    public static SerializedStatus toEnum(String serializedStatus){
         return switch(serializedStatus){
             case "SERIALIZED" -> SERIALIZED;
             case "PAUSE" -> PAUSE;
